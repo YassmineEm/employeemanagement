@@ -1,0 +1,33 @@
+replicaCount: 1
+
+image:
+  repository: employeemanagement
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: true
+  host: employeemanagement.local
+  annotations: {}
+  tls: []
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+mysql:
+  enabled: true
+  image:
+    repository: mysql
+    tag: 8.0
+  auth:
+    rootPassword: rootpassword
+    database: employeedb
